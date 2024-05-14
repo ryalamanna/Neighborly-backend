@@ -2,9 +2,9 @@ import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { AvailableUserRoles , UserRolesEnum } from '../../../constants.js'
 dotenv.config();
 
-// import { AvailableUserRoles } from '../../../constants';
 const userSchema = new Schema(
     {
         // avatar: {
@@ -17,7 +17,7 @@ const userSchema = new Schema(
         //         localPath: '',
         //     },
         // },
-        username: {
+        name: {
             type: String,
             required: true,
             unique: true,
@@ -32,12 +32,12 @@ const userSchema = new Schema(
             lowercase: true,
             trim: true,
         },
-        // role: {
-        //     type: String,
-        //     enum: AvailableUserRoles,
-        //     default: UserRolesEnum.USER,
-        //     required: true,
-        // },
+        role: {
+            type: String,
+            enum: AvailableUserRoles,
+            default: UserRolesEnum.USER,
+            required: true,
+        },
         password: {
             type: String,
             required: [true, 'Password is required'],

@@ -5,10 +5,10 @@ import { User } from '../../../models/apps/auth/user.models.js';
 
 export const registerUser = asyncHandler(async (req, res) => {
     console.log(req.body);
-    const { email, username, password } = req.body;
+    const { email, name, password } = req.body;
 
     const existedUser = await User.findOne({
-        $or: [{ username }, { email }],
+        $or: [{ name }, { email }],
     });
 
     if (existedUser) {
@@ -21,7 +21,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         email,
         password,
-        username,
+        name,
     });
 
     await user.save({ validateBeforeSave: false });
